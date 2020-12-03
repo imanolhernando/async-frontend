@@ -1,6 +1,7 @@
 {
   "name": "async-frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Imanol Hernando",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
