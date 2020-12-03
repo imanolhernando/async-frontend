@@ -1,21 +1,36 @@
-import { ApiService } from './../../services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+
+
+import * as GitHubActions from './../../store/actions/github.actions';
+import { IssueData } from '../../models/issue-data';
+import { map } from 'rxjs/operators';
+import { IssueDataState } from 'src/app/store/reducers/github.reducers';
+import * as from from './../../store/selectors/';
 
 @Component({
   selector: 'app-repositorio',
   templateUrl: './repositorio.component.html',
   styleUrls: ['./repositorio.component.scss']
 })
-export class RepositorioComponent implements OnInit {
+export class RepositorioComponent implements OnInit , OnDestroy {
 
-  constructor(private api: ApiService) { }
+  issuesList: IssueData[] = [];
 
-  ngOnInit(): void {
-    this.api.getIssues('angular', 'components').subscribe(
-      data => {
-        console.log('Bien', data);
-      }
-    );
+  constructor(private store: Store< IssueDataState >) {
+    this.store.select(from.getIssuesSelector) .subscribe(data => {
+      this.issuesList = data.issueData as any;
+    });
   }
+
+
+  ngOnInit(): void { }
+
+  ngOnDestroy(): void  { }
+
+ dispatchGetIssues(): void{
+  this.store.dispatch(GitHubActions.getIssues());
+ }
 
 }

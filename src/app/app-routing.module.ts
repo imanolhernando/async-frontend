@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/repositorio/repositorio.module').then( m => m.RepositorioModule)
   },
   {
-    path: 'repositorio/:id',
+    path: 'repositorio/:owner/:repo',
     loadChildren: () => import('./pages/repositorio/repositorio.module').then( m => m.RepositorioModule)
   },
 ];
