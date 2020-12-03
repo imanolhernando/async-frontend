@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  endpoint: 'https://api.github.com'
+  endpoint: 'https://api.github.com',
+  
+  storeModules: []
 };
