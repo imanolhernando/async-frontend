@@ -10,16 +10,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ApiService {
 
   private repos = 'repos';
-  private headers: HttpHeaders = new HttpHeaders() .set('Content-Type', 'application/json') .set('x-requested-with', 'XMLHttpRequest');
+  private headers: HttpHeaders = new HttpHeaders() .set('Content-Type', 'application/json').set('x-requested-with', 'XMLHttpRequest');
 
   constructor(private http: HttpClient) { }
 
-  getIssues(str?: string, repo?: string): Observable<IssueData[]> {
+  getIssues(str: string): Observable<IssueData[]> {
 
     const URL = `${environment.endpoint}/${this.repos}/${str}/issues`;
 
     return this.http.get<IssueData[]> ( URL, { headers: this.headers, responseType: 'json' } );
-    // return this.http.get<IssueData[]> ( `assets/mock.json`);
 
   }
 
