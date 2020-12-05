@@ -1,0 +1,15 @@
+<header>
+    <h1>Introduce un repositorio de GitHub</h1>  
+    <mat-card class="mat-elevation-z8"> 
+        <form [formGroup]="form" >
+          <mat-form-field>
+            <mat-label>GitHub Repo</mat-label>
+            <input matInput formControlName="url">
+          </mat-form-field>
+          <!-- <small  *ngIf="!form.controls['url'].valid && form.controls['url'].touched" >Error</small> -->
+          <small  *ngIf="!form.controls['url'].valid && form.controls['url'].touched" >Debe comenzar con: `https://github.com/`</small>
+        </form>
+    </mat-card>
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Ver Issues</button>
+    <ng-content></ng-content>
+</header>

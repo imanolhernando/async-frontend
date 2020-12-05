@@ -1,14 +1,47 @@
 
-  
-<main>
-  <h1>Introduce un repositorio de GitHub</h1>  
-  <mat-card class="mat-elevation-z8"> 
-      <form>
-        <mat-form-field>
-          <mat-label>GitHub Repo</mat-label>
-          <input matInput value="https://github.com/irontec/ivozprovider">
-        </mat-form-field>
-      </form>
-  </mat-card>
-  <button mat-raised-button color="primary">Ver Issues</button>
+<app-buscador (url)='dispatchGetIssues($event)' *ngIf="!issuesList || issuesList.length === 0">
+    <p *ngIf="error">{{error.message}}</p>
+</app-buscador>
+
+
+<main *ngIf="issuesList  && issuesList.length > 0">
+<mat-toolbar color="primary">
+<span>Issues</span>
+<span class="spacer"></span>
+<button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
+
+</mat-toolbar>
+<mat-accordion class="section">
+    
+<mat-expansion-panel  *ngFor="let issue of issuesList"  class="card">
+    <mat-expansion-panel-header>
+    <mat-panel-title>
+        {{issue.title}}
+    </mat-panel-title>
+    <mat-panel-description>
+     {{issue.closed_at}}
+    </mat-panel-description>
+    </mat-expansion-panel-header>
+    <dl>
+        <dt>Usuario</dt>
+        <dd>{{issue.user.login}}</dd>
+        
+        <dt>Labels</dt>
+        <dd *ngFor="let label of issue.labels" >{{label.name}}</dd>
+
+        <dt>Fechas</dt>
+        <dd>{{issue.created_at | date}}</dd>
+        <dd>{{issue.updated_at | date}}</dd>
+        <dd>{{issue.closed_at | date}}</dd>
+
+        
+        <dt>Comentarios</dt>
+        <dd >{{issue.comments}}</dd>
+
+    </dl>
+    
+    <a [href]=issue.html_url target="blank"><button mat-raised-button color="primary" >Ver</button></a>
+</mat-expansion-panel>
+</mat-accordion>
 </main>
+

@@ -1,0 +1,36 @@
+header{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button{
+      margin: 1rem
+    }
+    mat-card {
+        position: relative;
+        width: 25rem;
+        border-radius: 0.4rem;
+        padding-top: 3rem;
+        margin-top: 0.5rem;
+        overflow: hidden;
+        mat-form-field{
+            width: 100%;
+        }
+        &::before {
+            content: "\2022 \2022 \2022";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 0.15rem;
+            background: var(--primary-color);
+            color: #c2c3c4;
+            width: 100%;
+            font-size: 2rem;
+            line-height: 0;
+            padding: 1rem 0;
+            text-indent: 0.1em;
+            }
+    }    
+
+}

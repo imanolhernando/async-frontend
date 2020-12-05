@@ -1,13 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-
-
+import { IssueDataState } from '../../store/state/github.state';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {  Store } from '@ngrx/store';
 import * as GitHubActions from './../../store/actions/github.actions';
 import { IssueData } from '../../models/issue-data';
-import { map } from 'rxjs/operators';
-import { IssueDataState } from 'src/app/store/reducers/github.reducers';
 import * as from from './../../store/selectors/';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-repositorio',
@@ -17,20 +14,33 @@ import * as from from './../../store/selectors/';
 export class RepositorioComponent implements OnInit , OnDestroy {
 
   issuesList: IssueData[] = [];
-
+  error: Error;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   constructor(private store: Store< IssueDataState >) {
-    this.store.select(from.getIssuesSelector) .subscribe(data => {
-      this.issuesList = data.issueData as any;
-    });
+
+  this.store.select(from.getIssuesSelector) .subscribe(data => {
+    this.issuesList = data.issueData as any;
+    this.error = data.error as any;
+  });
+
   }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // this.store.dispatch(GitHubActions.getIssues({payload:'irontec/ivozprovider'})); 
+  }
 
   ngOnDestroy(): void  { }
 
- dispatchGetIssues(): void{
-  this.store.dispatch(GitHubActions.getIssues());
- }
+  dispatchGetIssues(url: string): void{
+    const str: string = url.replace('https://github.com/', '');
+    console.log(url.replace('https://github.com/', ''));
+    this.store.dispatch(GitHubActions.getIssues({payload: str}));
+  }
+
+  clear(): void{
+    this.store.dispatch(GitHubActions.clearIssues({payload: []}));
+  }
 
 }
