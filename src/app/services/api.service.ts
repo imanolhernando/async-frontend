@@ -14,12 +14,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getIssues(owner?: string, repo?: string): Observable<IssueData[]> {
+  getIssues(str?: string, repo?: string): Observable<IssueData[]> {
 
-    // const URL = `${environment.endpoint}/${this.repos}/${owner}/${repo}/issues`;
+    const URL = `${environment.endpoint}/${this.repos}/${str}/issues`;
 
-    // return this.http.get<IssueData> ( URL, { headers: this.headers, responseType: 'json' } );
-    return this.http.get<IssueData[]> ( `assets/mock.json`);
+    return this.http.get<IssueData[]> ( URL, { headers: this.headers, responseType: 'json' } );
+    // return this.http.get<IssueData[]> ( `assets/mock.json`);
 
   }
 

@@ -11,7 +11,6 @@ export const extModules = [
 export const environment = {
   production: false,
   endpoint: 'https://api.github.com',
-  
   storeModules: extModules
 };
 

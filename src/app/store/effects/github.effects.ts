@@ -14,8 +14,8 @@ export class IssuesEffects {
   getIssues$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
       ofType(GitHubActions.getIssues),
-      exhaustMap(() =>
-        this.apiService.getIssues().pipe(
+      exhaustMap((action) =>
+        this.apiService.getIssues(action.payload).pipe(
           map((data: IssueData[]) => {
             return GitHubActions.successGetIssues({ payload: data });
           }),
@@ -26,5 +26,7 @@ export class IssuesEffects {
       )
     )
   );
-}
 
+
+
+}

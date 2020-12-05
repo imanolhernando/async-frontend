@@ -1,14 +1,15 @@
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import * as fromGithub from './reducers/github.reducers';
+import { reducer,  } from './reducers/github.reducers';
+import { IssueDataState } from './state/github.state';
 
 export interface State {
-    issue: fromGithub.IssueDataState;
+    issue: IssueDataState;
     router: RouterReducerState;
   }
 
 export const reducers: ActionReducerMap<State> = {
-    issue: fromGithub.reducer,
+    issue: reducer,
     router: routerReducer
   };
 
