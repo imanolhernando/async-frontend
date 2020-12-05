@@ -1,7 +1,7 @@
 {
   "name": "async-frontend",
   "short_name": "async-frontend",
-  "theme_color": "#1976d2",
+  "theme_color": "#03045e",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
