@@ -1,47 +1,57 @@
 
-<app-buscador (url)='dispatchGetIssues($event)' *ngIf="!issuesList || issuesList.length === 0">
-    <p *ngIf="error">{{error.message}}</p>
-</app-buscador>
+<ng-container  *ngIf="!issuesList || issuesList.length === 0">
+    <app-buscador (url)='dispatchGetIssues($event)'>
+        <p *ngIf="error">{{error.message}}</p>
+    </app-buscador>
+</ng-container>
 
+<ng-container *ngIf="issuesList  && issuesList.length > 0" >
+    <main>
+        <mat-toolbar color="primary">
+            <span>Issues</span>
+            <span class="spacer"></span>
+            <button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
+        </mat-toolbar>
+        <mat-accordion class="section" >
+            <mat-expansion-panel  *ngFor="let issue of issuesList"  >
+                <mat-expansion-panel-header>
+                <mat-panel-title>  {{issue.title}} </mat-panel-title>
+                </mat-expansion-panel-header>
+                <dl>
+                    <div>
+                        <dt>Usuario</dt>
+                        <dd>{{issue.user.login}}</dd>
+                    </div>
 
-<main *ngIf="issuesList  && issuesList.length > 0">
-<mat-toolbar color="primary">
-<span>Issues</span>
-<span class="spacer"></span>
-<button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
+                    <div *ngIf="issue && issue.labels.length > 0">
+                        <dt>Labels</dt>
+                        <dd *ngFor="let label of issue.labels" >{{label.name}}</dd>
+                    </div>
+                    
+                    <div>
+                    <dt>Fecha creación</dt>
+                    <dd>{{issue.created_at | date}}</dd>
+                    </div>
 
-</mat-toolbar>
-<mat-accordion class="section">
-    
-<mat-expansion-panel  *ngFor="let issue of issuesList"  class="card">
-    <mat-expansion-panel-header>
-    <mat-panel-title>
-        {{issue.title}}
-    </mat-panel-title>
-    <mat-panel-description>
-     {{issue.closed_at}}
-    </mat-panel-description>
-    </mat-expansion-panel-header>
-    <dl>
-        <dt>Usuario</dt>
-        <dd>{{issue.user.login}}</dd>
-        
-        <dt>Labels</dt>
-        <dd *ngFor="let label of issue.labels" >{{label.name}}</dd>
+                    
+                    <div>
+                    <dt>Fecha modificación</dt>
+                    <dd>{{issue.updated_at | date}}</dd>
+                    </div>
 
-        <dt>Fechas</dt>
-        <dd>{{issue.created_at | date}}</dd>
-        <dd>{{issue.updated_at | date}}</dd>
-        <dd>{{issue.closed_at | date}}</dd>
+                    <div *ngIf="issue && issue.closed_at">
+                        <dt>Fecha finalización</dt>
+                        <dd>{{issue.closed_at | date}}</dd>
+                    </div>
 
-        
-        <dt>Comentarios</dt>
-        <dd >{{issue.comments}}</dd>
-
-    </dl>
-    
-    <a [href]=issue.html_url target="blank"><button mat-raised-button color="primary" >Ver</button></a>
-</mat-expansion-panel>
-</mat-accordion>
-</main>
+                    <div>
+                    <dt>Comentarios</dt>
+                    <dd >{{issue.comments}}</dd>
+                    </div>
+                </dl>
+                <a [href]="issue.html_url" target="blank"><button mat-raised-button color="accent" >Ver</button></a>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </main>
+</ng-container>
 

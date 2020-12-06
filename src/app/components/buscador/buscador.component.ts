@@ -18,9 +18,10 @@ export class BuscadorComponent {
   createForm(): void {
     this.form = new FormGroup({
       url:
-        new FormControl('https://github.com/irontec/ivozprovider',
-          [ urlValidator(), Validators.required  ])
-    }, {updateOn: 'blur'});
+        new FormControl(
+          'https://github.com/irontec/ivozprovider',
+          [ urlValidator(), Validators.required ])
+    });
   }
 
   submit(): void {

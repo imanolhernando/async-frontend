@@ -14,7 +14,7 @@ import { MaterialModule } from './../../modules/material.module';
     CommonModule,
     RepositorioRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class RepositorioModule { }
