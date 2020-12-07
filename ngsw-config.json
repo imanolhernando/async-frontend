@@ -3,13 +3,14 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "asyncFrontend",
       "installMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
+          "/*.scss",
           "/*.css",
           "/*.js"
         ]

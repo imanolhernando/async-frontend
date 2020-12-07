@@ -23,7 +23,7 @@ import {  RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+    // StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }), 
     environment.storeModules,
     EffectsModule.forRoot([IssuesEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),

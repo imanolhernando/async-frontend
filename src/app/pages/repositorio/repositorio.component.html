@@ -8,13 +8,13 @@
 <ng-container *ngIf="issuesList  && issuesList.length > 0" >
     <main>
         <mat-toolbar color="primary">
-            <span>Issues</span>
+            <span>{{resultsLength}} Issues</span>
             <span class="spacer"></span>
             <button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
         </mat-toolbar>
 
         <mat-accordion class="section" >
-            <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25]" [pageSize]="5" ></mat-paginator>
+            <mat-paginator [length]="resultsLength" [pageSize]="20" ></mat-paginator>
             <mat-expansion-panel  *ngFor="let issue of obs  | async"  >
                 <mat-expansion-panel-header>
                 <mat-panel-title>  {{issue.title}} </mat-panel-title>
