@@ -15,21 +15,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getIssues(str: string): Observable<IssueData[]> {
+  getIssues(user: string, repo: string, perPage: number, page: number): Observable<IssueData[]> {
 
-    // const URL = `${environment.endpoint}/${this.repos}/${str}/issues`;
+    debugger
+    const URL = `${environment.endpoint}/${this.repos}/${user}/${repo}/issues?per_page=${perPage}&page=${page}`;
 
-    // return this.http.get<IssueData[]> ( URL, { headers: this.headers, responseType: 'json' } );
-    return this.http.get<IssueData[]> ( `assets/mock.json`);
+    return this.http.get<IssueData[]> ( URL, { headers: this.headers, responseType: 'json' } );
+    // return this.http.get<IssueData[]> ( `assets/mock.json`);
 
   }
 
-  getRepo(str: string): Observable<RepoData> {
+  getRepo(user: string, repo: string): Observable<RepoData> {
 
-    // const URL = `${environment.endpoint}/${this.repos}/${str}`;
+    const URL = `${environment.endpoint}/${this.repos}/${user}/${repo}`;
 
-    // return this.http.get<RepoData> ( URL, { headers: this.headers, responseType: 'json' } );
-    return this.http.get<RepoData> ( `assets/repo.json`);
+    return this.http.get<RepoData> ( URL, { headers: this.headers, responseType: 'json' } );
+    // return this.http.get<RepoData> ( `assets/repo.json`);
 
   }
 

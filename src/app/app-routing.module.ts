@@ -4,16 +4,16 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'repositorio',
+    redirectTo: 'repo',
     pathMatch: 'full'
   },
   {
-    path: 'repositorio',
-    loadChildren: () => import('./pages/repositorio/repositorio.module').then( m => m.RepositorioModule)
+    path: 'repo',
+    loadChildren: () => import('./pages/repo/repo.module').then( m => m.RepoModule)
   },
   {
-    path: 'repositorio/:owner/:repo',
-    loadChildren: () => import('./pages/repositorio/repositorio.module').then( m => m.RepositorioModule)
+    path: ':user/:repo',
+    loadChildren: () => import('./pages/issues/issues.module').then( m => m.IssuesModule)
   },
 ];
 

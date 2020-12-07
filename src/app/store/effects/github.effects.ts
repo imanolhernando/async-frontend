@@ -16,7 +16,7 @@ export class IssuesEffects {
     this.action$.pipe(
       ofType(GitHubActions.getIssues),
       exhaustMap((action) =>
-        this.apiService.getIssues(action.payload).pipe(
+        this.apiService.getIssues(action.user,action.repo,action.perPage,action.page).pipe(
           map((data: IssueData[]) => {
             console.log( data.length)
             return GitHubActions.successGetIssues({ payload: data });
@@ -31,11 +31,10 @@ export class IssuesEffects {
 
   getRepo$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
-      ofType(GitHubActions.getIssues),
+      ofType(GitHubActions.getRepo),
       exhaustMap((action) =>
-        this.apiService.getRepo(action.payload).pipe(
+        this.apiService.getRepo(action.user,action.repo).pipe(
           map((data: RepoData) => {
-            debugger
             return GitHubActions.successGetRepo({ payload: data.open_issues_count });
           }),
           catchError((error) => {

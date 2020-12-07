@@ -1,0 +1,54 @@
+<ng-container  >
+    <main>
+        <mat-toolbar color="primary">
+            <span>{{resultsLength}} Issues</span>
+            <span class="spacer"></span>
+            <button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
+        </mat-toolbar>
+        <mat-accordion class="section" *ngIf="issuesList  && issuesList.length > 0">
+            <mat-paginator [length]="resultsLength" 
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEventEmit($event)" ></mat-paginator>
+            <mat-expansion-panel  *ngFor="let issue of obs  | async; let i= index"  >
+                <mat-expansion-panel-header>
+                <mat-panel-title>{{i}}  {{issue.title}} </mat-panel-title>
+                </mat-expansion-panel-header>
+                <dl>
+                    <div>
+                        <dt>Usuario</dt>
+                        <dd>{{issue.user.login}}</dd>
+                    </div>
+
+                    <div *ngIf="issue && issue.labels.length > 0">
+                        <dt>Labels</dt>
+                        <dd *ngFor="let label of issue.labels" >{{label.name}}</dd>
+                    </div>
+                    
+                    <div>
+                    <dt>Fecha creación</dt>
+                    <dd>{{issue.created_at | date}}</dd>
+                    </div>
+
+                    
+                    <div>
+                    <dt>Fecha modificación</dt>
+                    <dd>{{issue.updated_at | date}}</dd>
+                    </div>
+
+                    <div *ngIf="issue && issue.closed_at">
+                        <dt>Fecha finalización</dt>
+                        <dd>{{issue.closed_at | date}}</dd>
+                    </div>
+
+                    <div>
+                    <dt>Comentarios</dt>
+                    <dd >{{issue.comments}}</dd>
+                    </div>
+                </dl>
+                <a [href]="issue.html_url" target="blank"><button mat-raised-button color="accent">Ver</button></a>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </main>
+</ng-container>
+
