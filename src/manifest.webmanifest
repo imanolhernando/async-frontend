@@ -1,8 +1,8 @@
 {
   "name": "async-frontend",
   "short_name": "async-frontend",
-  "theme_color": "#03045e",
-  "background_color": "#fafafa",
+  "theme_color": "#026069",
+  "background_color": "#c1bbde",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
