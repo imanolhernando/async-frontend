@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatPaginatorModule
   ],
   exports: [
     MatInputModule,
@@ -28,7 +30,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

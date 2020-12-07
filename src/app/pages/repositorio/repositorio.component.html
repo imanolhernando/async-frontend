@@ -12,8 +12,10 @@
             <span class="spacer"></span>
             <button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
         </mat-toolbar>
+
         <mat-accordion class="section" >
-            <mat-expansion-panel  *ngFor="let issue of issuesList"  >
+            <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25]" [pageSize]="5" ></mat-paginator>
+            <mat-expansion-panel  *ngFor="let issue of obs  | async"  >
                 <mat-expansion-panel-header>
                 <mat-panel-title>  {{issue.title}} </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -49,7 +51,7 @@
                     <dd >{{issue.comments}}</dd>
                     </div>
                 </dl>
-                <a [href]="issue.html_url" target="blank"><button mat-raised-button color="accent" >Ver</button></a>
+                <a [href]="issue.html_url" target="blank"><button mat-raised-button color="accent">Ver</button></a>
             </mat-expansion-panel>
         </mat-accordion>
     </main>

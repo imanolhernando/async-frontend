@@ -1,9 +1,12 @@
 import { IssueDataState } from '../../store/state/github.state';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {  Store } from '@ngrx/store';
 import { getIssues, clearIssues } from './../../store/actions/github.actions';
 import { IssueData } from '../../models/issue-data';
 import { getIssuesSelector } from '../../store/selectors/github.selector';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-repositorio',
@@ -11,22 +14,36 @@ import { getIssuesSelector } from '../../store/selectors/github.selector';
   styleUrls: ['./repositorio.component.scss']
 })
 export class RepositorioComponent implements OnInit , OnDestroy {
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   issuesList: IssueData[] = [];
   error: Error;
+  dataSource: MatTableDataSource<IssueData>;
+  obs: Observable<IssueData[]>;
 
-  constructor(private store: Store< IssueDataState >) {
-    this.store.select(getIssuesSelector).subscribe(data => {
-      this.issuesList = data.issueData as any;
-      this.error = data.error as any;
+  constructor(
+    private store: Store< IssueDataState[] >,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+
+  this.store.select(getIssuesSelector).subscribe(data => {
+      if (data.issueData){
+        this.issuesList = data.issueData;
+        this.dataSource = new MatTableDataSource<IssueData>(this.issuesList);
+        this.error = data.error;
+        this.changeDetectorRef.detectChanges();
+        this.dataSource.paginator = this.paginator;
+        this.obs = this.dataSource.connect();
+      }
     });
   }
 
   ngOnInit(): void {
-    this.store.dispatch(getIssues({payload:'irontec/ivozprovider'}));
+    this.store.dispatch(getIssues({payload: 'irontec/ivozprovider'}));
   }
 
-  ngOnDestroy(): void  { }
+  ngOnDestroy(): void  {
+    // TODO unsubscribe
+  }
 
   dispatchGetIssues(url: string): void{
     const str: string = url.replace('https://github.com/', '');
