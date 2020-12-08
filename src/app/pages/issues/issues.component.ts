@@ -57,7 +57,6 @@ export class IssuesComponent implements OnInit, OnDestroy {
   }
 
   pageEventEmit(event): void{
-    this.resultsLength = event.length;
     this.pageEvent = event;
     this.store.dispatch(getIssues(
       {user: this.user, repo: this.repo, perPage:  this.pageEvent.pageSize, page:  this.pageEvent.pageIndex + 1}

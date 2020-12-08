@@ -14,16 +14,8 @@ const GitHubreducer = createReducer(
   on(GitHubActions.clearIssues, (state, { payload }) => ({ ...state, issueData: payload}) )
 );
 
-export function reducer(state: IssueDataState | undefined, action: Action): {issueData: IssueData[]; count: number; error: any; }  {
+export function reducer(state: IssueDataState | undefined, action: Action): {issueData: IssueData[]; count: number; error: Error; }  {
   return GitHubreducer(state, action);
 }
-
-export const getIssues = (state: IssueDataState) => {
-  return {
-    issueData : state.issueData,
-    count: state.count,
-    error :  state.error
-  };
-};
 
 

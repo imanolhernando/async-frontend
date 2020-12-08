@@ -9,7 +9,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { IssuesEffects } from './store/effects/github.effects';
 import { reducers, metaReducers } from './store';
-import {  RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -26,7 +25,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     NgxSpinnerModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    // StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     environment.storeModules,
     EffectsModule.forRoot([IssuesEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),

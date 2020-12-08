@@ -3,7 +3,7 @@
         <form [formGroup]="form" >
           <mat-form-field>
             <mat-label>Repositorio</mat-label>
-            <input matInput formControlName="url" placeholder="https://github.com/irontec/ivozprovider">
+            <input matInput formControlName="url" placeholder="https://github.com/angular/angular">
           </mat-form-field>
           <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.required && form.controls['url'].touched" class="mat-error">Inserta una url de Github</small>
           <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.urlError" class="mat-error" >Debe comenzar con: `https://github.com/`</small>

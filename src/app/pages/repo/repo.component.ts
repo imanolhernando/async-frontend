@@ -23,7 +23,7 @@ export class RepoComponent implements OnInit {
     this.form = new FormGroup({
       url:
         new FormControl(
-          'https://github.com/angular/angular',
+          '',
           [ urlValidator(), Validators.required ])
     });
   }
