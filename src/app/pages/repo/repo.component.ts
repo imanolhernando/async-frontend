@@ -1,6 +1,6 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { urlValidator } from '../../validators';
+// import { urlValidator } from '../../validators';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-repo',
@@ -10,13 +10,12 @@ import { Router } from '@angular/router';
 export class RepoComponent implements OnInit {
 
   form: FormGroup;
-
   constructor(
     private  router: Router,
-    public formBuilder: FormBuilder ) {   }
+    public formBuilder: FormBuilder ) {
+      this.createForm();  }
 
   ngOnInit(): void{
-    this.createForm();
   }
 
   createForm(): void {
@@ -24,13 +23,19 @@ export class RepoComponent implements OnInit {
       url:
         new FormControl(
           '',
-          [ urlValidator(), Validators.required ])
+          [
+            // urlValidator,
+            Validators.required,
+            Validators.pattern('^(https:\/\/)?(http:\/\/)?(github.com\/)[a-z,-]+(\/)+[a-z,-]+')
+          ])
     });
   }
 
-  dispatchGetIssues(url: string): void{
-    const str: string[] = url.replace('https://github.com/', '').split('/');
-    this.router.navigate([`${str[0]}/${str[1]}`]);
+  submit(url: string): void{
+    const str: string[] = url.replace(( 'https://github.com/' || 'http://github.com/' || 'github.com/'  ), '').split('/');
+    if (str.length  > 0 ) {
+      this.router.navigate([`${str[str.length - 2] }/${str[str.length - 1 ]}`]);
+    }
   }
 
 }
