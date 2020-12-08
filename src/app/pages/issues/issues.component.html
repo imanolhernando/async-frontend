@@ -1,16 +1,21 @@
 <ng-container  >
     <main>
         <mat-toolbar color="primary">
-            <span>{{resultsLength}} Issues</span>
+            <aside *ngIf="error">
+               Error
+            </aside>
+            <span  *ngIf="!error">{{resultsLength}} Issues</span>
             <span class="spacer"></span>
-            <button mat-raised-button color="secondary" (click)="clear()">Borrar</button>
+            <button mat-raised-button color="warn" (click)="clear()" >Cerrar</button>
         </mat-toolbar>
-        <mat-accordion class="section" *ngIf="issuesList  && issuesList.length > 0">
+        <p *ngIf="error" class="section">{{ error.message }}</p>
+        
+        <mat-accordion class="section" *ngIf="issuesList && !error">
             <mat-paginator [length]="resultsLength" 
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
             (page)="pageEventEmit($event)" ></mat-paginator>
-            <mat-expansion-panel  *ngFor="let issue of obs  | async; let i= index"  >
+            <mat-expansion-panel  *ngFor="let issue of issuesList$  | async; let i= index"  >
                 <mat-expansion-panel-header>
                 <mat-panel-title>{{i}}  {{issue.title}} </mat-panel-title>
                 </mat-expansion-panel-header>

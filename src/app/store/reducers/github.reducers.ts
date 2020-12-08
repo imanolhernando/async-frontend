@@ -7,7 +7,7 @@ const GitHubreducer = createReducer(
   initializeState,
   on(GitHubActions.getIssues, state => state),
   on(GitHubActions.successGetIssues, (state, { payload }) => ({ ...state, issueData: payload, error: null}) ),
-  on(GitHubActions.errorGetIssues, (state, { error }) => ({ ...state, error})),
+  on(GitHubActions.errorGetIssues, (state, { error }) => ({ ...state, error, issueData: []})),
   on(GitHubActions.getRepo, state => state),
   on(GitHubActions.successGetRepo, (state, { payload }) => ({ ...state, count: payload, error: null}) ),
   on(GitHubActions.errorGetRepo, (state, { error }) => ({ ...state, error})),

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IssuesRoutingModule } from './issues-routing.module';
 import { IssuesComponent } from './issues.component';
-import { MaterialModule } from 'src/app/modules/material.module';
+import { MaterialModule } from '../../modules/material.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { getSpanishPaginatorIntl } from '../../paginator/paginator';
+import { getSpanishPaginatorIntl } from '../../paginator';
 
 @NgModule({
   declarations: [IssuesComponent],

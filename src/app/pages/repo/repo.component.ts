@@ -1,9 +1,7 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { urlValidator } from 'src/app/validators';
-import { getIssues, getRepo } from './../../store/actions/github.actions';
-import { Store } from '@ngrx/store';
-import { NavigationExtras, Router } from '@angular/router';
+import { urlValidator } from '../../validators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-repo',
   templateUrl: './repo.component.html',
@@ -14,7 +12,6 @@ export class RepoComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private store: Store,
     private  router: Router,
     public formBuilder: FormBuilder ) {   }
 
@@ -32,9 +29,8 @@ export class RepoComponent implements OnInit {
   }
 
   dispatchGetIssues(url: string): void{
-    const str: string = url.replace('https://github.com/', '');
-    const strarr: string[] = url.replace('https://github.com/', '').split('/');
-    this.router.navigate([`${strarr[0]}/${strarr[1]}`]);
+    const str: string[] = url.replace('https://github.com/', '').split('/');
+    this.router.navigate([`${str[0]}/${str[1]}`]);
   }
 
 }

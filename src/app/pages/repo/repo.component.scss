@@ -4,23 +4,40 @@ section{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    mat-card, h1{
+        width: 90%;
+        max-width: 25rem;
+        box-sizing: border-box;
+    }
     h1{
         text-align: center;
         font-weight: bold;
         color: var(--accent-color);
+        position: relative;
+        &::after {
+            content: "\2022";
+            position: absolute;
+            color: var(--warn-color);
+            text-align: left;
+            top: 0;
+            left: 0rem;
+            height: 0.2rem;
+            width: 100%;
+            font-size: 2rem;
+            line-height: 0;
+            padding: -3rem 0;
+            text-indent: -0.1rem;
+            }
     }
     button{
       margin: 1rem
     }
     mat-card {
         position: relative;
-        width: 90%;
-        max-width: 25rem;
         border-radius: 0.4rem;
         padding-top: 3rem;
         margin-top: 0.5rem;
         overflow: hidden;
-        box-sizing: border-box;
         mat-form-field{
             width: 100%;
         }
@@ -31,7 +48,7 @@ section{
             left: 0;
             height: 0.15rem;
             background: var(--primary-color);
-            color: #c2c3c4;
+            color: var(--accent-lighter-color);
             width: 100%;
             font-size: 2rem;
             line-height: 0;
