@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
@@ -11,6 +10,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { IssuesEffects } from './store/effects/github.effects';
 import { reducers, metaReducers } from './store';
 import {  RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,13 +24,15 @@ import {  RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxSpinnerModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    // StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }), 
+    // StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     environment.storeModules,
     EffectsModule.forRoot([IssuesEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true, } ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
