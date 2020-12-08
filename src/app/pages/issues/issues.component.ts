@@ -22,7 +22,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
   issuesList$: Observable<IssueData[]>;
   resultsLength: number;
   state$: Subscription;
-  pageSize = 100;
+  pageSize = 7;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
   user: string;
@@ -48,7 +48,6 @@ export class IssuesComponent implements OnInit, OnDestroy {
         this.changeDetectorRef.detectChanges();
         this.issuesList$ = this.issuesList.connect();
         this.resultsLength = data.count;
-        this.calculate(this.resultsLength, this.pageSize);
       }
     });
   }
@@ -58,14 +57,11 @@ export class IssuesComponent implements OnInit, OnDestroy {
   }
 
   pageEventEmit(event): void{
-    console.error(event);
     this.resultsLength = event.length;
-    this.store.dispatch(getIssues({user: this.user, repo: this.repo, perPage: event.pageSize, page: event.pageIndex + 1}));
     this.pageEvent = event;
-  }
-
-  calculate(total: number, perPage: number): number{
-    return  total  / perPage;
+    this.store.dispatch(getIssues(
+      {user: this.user, repo: this.repo, perPage:  this.pageEvent.pageSize, page:  this.pageEvent.pageIndex + 1}
+    ));
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string): void {

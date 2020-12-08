@@ -244,6 +244,11 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
     font-family: 'Roboto';
   }
 }
-       
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// Forzar el margen por defecto para encajar en movil
+.mat-paginator-range-label {
+  margin: 0 1rem 0 1rem !important;
+} 

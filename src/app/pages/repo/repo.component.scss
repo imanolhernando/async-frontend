@@ -1,26 +1,27 @@
-section{
+main{
     height: 100%;
     display: flex;
+    background: #f5f5f5;
+    background-image: -webkit-linear-gradient(-45deg, var(--primary-color) 20%, #f5f5f5 -80%);
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    mat-card, h1{
+    h1{
         width: 90%;
         max-width: 25rem;
         box-sizing: border-box;
-    }
-    h1{
         text-align: center;
         font-weight: bold;
         color: var(--accent-color);
         position: relative;
-        &::after {
+        &::before {
             content: "\2022";
             position: absolute;
             color: var(--warn-color);
-            text-align: left;
+            text-align: right;
             top: 0;
-            left: 0rem;
+            right: 0rem;
             height: 0.2rem;
             width: 100%;
             font-size: 2rem;
@@ -32,29 +33,14 @@ section{
     button{
       margin: 1rem
     }
-    mat-card {
-        position: relative;
-        border-radius: 0.4rem;
-        padding-top: 3rem;
-        margin-top: 0.5rem;
-        overflow: hidden;
-        border-bottom: 5px solid var(--warn-color);
-        mat-form-field{
-            width: 100%;
-        }
-        &::before {
-            content: "\2022 \2022 \2022";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 0.15rem;
-            background: var(--primary-color);
-            color: var(--accent-lighter-color);
-            width: 100%;
-            font-size: 2rem;
-            line-height: 0;
-            padding: 1rem 0;
-            text-indent: 0.1em;
-            }
-    }    
+    form{
+        width: 90%;
+        max-width: 25rem;
+        box-sizing: border-box;
+        font-size: 1.15rem;
+    }
+    mat-form-field{
+        width: 100%;
+        box-sizing: border-box;
+    }  
 }
