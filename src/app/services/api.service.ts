@@ -16,22 +16,13 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getIssues(user: string, repo: string, perPage: number, page: number): Observable<IssueData[]> {
-
-    debugger
     const URL = `${environment.endpoint}/${this.repos}/${user}/${repo}/issues?per_page=${perPage}&page=${page}`;
-
     return this.http.get<IssueData[]> ( URL, { headers: this.headers, responseType: 'json' } );
-    // return this.http.get<IssueData[]> ( `assets/mock.json`);
-
   }
 
   getRepo(user: string, repo: string): Observable<RepoData> {
-
     const URL = `${environment.endpoint}/${this.repos}/${user}/${repo}`;
-
     return this.http.get<RepoData> ( URL, { headers: this.headers, responseType: 'json' } );
-    // return this.http.get<RepoData> ( `assets/repo.json`);
-
   }
 
 }
