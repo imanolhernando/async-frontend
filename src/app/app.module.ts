@@ -1,10 +1,10 @@
+import { environment } from './../environments/environment.prod';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { IssuesEffects } from './store/effects/github.effects';
@@ -13,6 +13,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     NgxSpinnerModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    environment.storeModules,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     EffectsModule.forRoot([IssuesEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, }),
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true, } ],
   bootstrap: [AppComponent],
