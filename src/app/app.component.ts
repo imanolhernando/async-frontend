@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+  <ngx-spinner size="default" ></ngx-spinner>
+  <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-  title = 'async-frontend';
-}
+export class AppComponent { }

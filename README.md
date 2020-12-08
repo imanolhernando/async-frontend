@@ -1,27 +1,45 @@
-# AsyncFrontend
+# ⚡ Async FrontEnd ⚡
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+Proyecto generado con [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-## Development server
+## Requisitos 📋
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* [Node](https://nodejs.org/es/)
 
-## Code scaffolding
+* [Angular CLI](https://github.com/angular/angular-cli)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`Opcional`
 
-## Build
+* [http-server](https://www.npmjs.com/package/http-server)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Instalación 🔧
 
-## Running unit tests
+ Clonar repositorio
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* `git clone https://github.com/imanolhernando/async-frontend`
 
-## Running end-to-end tests
+Instalar dependencias
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+* `cd async-frontend`
+* `npm install`
 
-## Further help
+## Servidor desarrollo ⚙️
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ejecutar
+
+* `ng serve`
+
+Abrir en el navegador [http://localhost:4200](http://localhost:4200)
+
+## Servidor producción 🔒
+
+Para probar en un servidor de producción una opción es `http-server`, se puede comprobar la configuración básica del service-worker e instalar la aplicación.
+
+* `ng build --prod`
+* `cd dist/async-frontend`
+* `http-server`
+
+Abrir en el navegador [http://localhost:8080](http://localhost:8080)
+
+---
+ Hecho con 💖⚡ por [Imanol](https://www.linkedin.com/in/imanolhernando/)  😊👋
