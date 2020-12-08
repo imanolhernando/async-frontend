@@ -1,10 +1,8 @@
 <ng-container  >
     <main>
         <mat-toolbar color="primary">
-            <aside *ngIf="error">
-               Error
-            </aside>
-            <span  *ngIf="!error">{{resultsLength}} Issues</span>
+            <p *ngIf="error"> Error </p>
+            <h1  *ngIf="!error">{{resultsLength}} Issues</h1>
             <span class="spacer"></span>
             <button mat-raised-button color="warn" (click)="clear()" >Cerrar</button>
         </mat-toolbar>
@@ -15,9 +13,9 @@
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
             (page)="pageEventEmit($event)" ></mat-paginator>
-            <mat-expansion-panel  *ngFor="let issue of issuesList$  | async; let i= index"  >
+            <mat-expansion-panel  *ngFor="let issue of issuesList$  | async;"  >
                 <mat-expansion-panel-header>
-                <mat-panel-title>{{i}}  {{issue.title}} </mat-panel-title>
+                <mat-panel-title> {{issue.title}} </mat-panel-title>
                 </mat-expansion-panel-header>
                 <dl>
                     <div>
@@ -51,7 +49,7 @@
                     <dd >{{issue.comments}}</dd>
                     </div>
                 </dl>
-                <a [href]="issue.html_url" target="blank"><button mat-raised-button color="accent">Ver</button></a>
+                <a [href]="issue.html_url" target="blank"><button mat-raised-button color="accent">Ver en GitHub</button></a>
             </mat-expansion-panel>
         </mat-accordion>
     </main>

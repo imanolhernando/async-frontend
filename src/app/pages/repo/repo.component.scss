@@ -38,6 +38,7 @@ section{
         padding-top: 3rem;
         margin-top: 0.5rem;
         overflow: hidden;
+        border-bottom: 5px solid var(--warn-color);
         mat-form-field{
             width: 100%;
         }

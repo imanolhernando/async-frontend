@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.scss']
 })
+
 export class IssuesComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   error: Error;

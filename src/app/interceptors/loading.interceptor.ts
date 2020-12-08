@@ -1,9 +1,9 @@
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor{
 
@@ -20,4 +20,5 @@ export class LoadingInterceptor implements HttpInterceptor{
                 })
             );
     }
+
 }

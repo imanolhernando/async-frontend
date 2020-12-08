@@ -1,4 +1,3 @@
-import { RepoData } from './../../models/repo-data';
 import { IssueData } from './../../models/issue-data';
 
 export interface IssueDataState {
@@ -8,7 +7,7 @@ export interface IssueDataState {
   }
 
 export const initializeState: IssueDataState = {
-        issueData : null,
-        error : null,
-        count: null
+    issueData : null,
+    error : null,
+    count: null
   };
