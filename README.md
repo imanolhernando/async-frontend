@@ -14,31 +14,32 @@ Proyecto generado con [Angular CLI](https://github.com/angular/angular-cli) vers
 
 ## Instalación 🔧
 
-* Clonar repositorio
-     >`git clone`
-* Instalar dependencias, dentro de la ruta del
-    >`cd asyncfrontend`
+ Clonar repositorio
 
-    >`npm install`
+* `git clone https://github.com/imanolhernando/async-frontend`
+
+Instalar dependencias
+
+* `cd async-frontend`
+* `npm install`
 
 ## Servidor desarrollo ⚙️
 
-* Ejecutar
-    >`ng serve`
+Ejecutar
 
-* Abrir en el navegador [localhost](http://localhost:4200)
+* `ng serve`
+
+Abrir en el navegador [http://localhost:4200](http://localhost:4200)
 
 ## Servidor producción 🔒
+
 Para probar en un servidor de producción una opción es `http-server`, se puede comprobar la configuración básica del service-worker e instalar la aplicación.
 
->`ng build --prod`
+* `ng build --prod`
+* `cd dist/async-frontend`
+* `http-server`
 
->`cd dist`
-
->`http-server`
-
-Abrir en el navegador [localhost](http://localhost:8080)
+Abrir en el navegador [http://localhost:8080](http://localhost:8080)
 
 ---
  Hecho con 💖⚡ por [Imanol](https://www.linkedin.com/in/imanolhernando/)  😊👋
-
