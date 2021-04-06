@@ -1,6 +1,14 @@
 # ⚡ Async FrontEnd ⚡
 
+* LIVE DEMO  `https://async-ngrx-frontend.netlify.app/`
+
 Proyecto generado con [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+
+## Frameworks
+
+*  Material Angular
+
+* NGRX
 
 ## Requisitos 📋
 
