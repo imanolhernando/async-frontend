@@ -1,6 +1,6 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-// import { urlValidator } from '../../validators';
+import { urlValidator } from '../../validators';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-repo',
@@ -24,7 +24,7 @@ export class RepoComponent implements OnInit {
         new FormControl(
           '',
           [
-            // urlValidator,
+            urlValidator,
             Validators.required,
             Validators.pattern('^(https:\/\/)?(http:\/\/)?(github.com\/)[a-z,-]+(\/)+[a-z,-]+')
           ])
