@@ -1,23 +1,18 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { IssueDataState } from 'src/app/store/state/github.state';
 import { MaterialModule } from './../../modules/material.module';
+import { IssueDataState } from './../../store/state/github.state';
 import { IssuesComponent } from './issues.component';
-
-const initialState: IssueDataState = {  
-  issueData: [],
-  error:null,
-  count:null };
-
 /**
  * Test unitario para el componente IssuesComponent
  */
+
 describe('IssuesComponent', () => {
   
-  let store: MockStore;
+  let store: MockStore < IssueDataState[]> ;
+  const initialState  = {};
   // declaracion del componente a testear
   let component: IssuesComponent;
 
@@ -58,6 +53,7 @@ describe('IssuesComponent', () => {
     fixture = TestBed.createComponent(IssuesComponent);
     // instanciamos el componente
     component = fixture.componentInstance;
+    store = TestBed.inject(MockStore)
     // se activara el NgOnInit
     fixture.detectChanges();
   });
@@ -66,6 +62,14 @@ describe('IssuesComponent', () => {
    * Test
    */
   it('should create', () => {
+    let issueDataState: IssueDataState[] = [
+      {
+        issueData : [],
+        error : null,
+      count: null
+      }
+    ]
+    store.setState(issueDataState);
     expect(component).toBeTruthy();
   });
 
