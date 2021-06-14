@@ -1,24 +1,24 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { AbstractControl, FormControl } from '@angular/forms';
-import { urlValidator } from '.';
+import { FormControl } from "@angular/forms";
+import { urlValidator } from ".";
+
 
 describe('urlValidator', () => {
-  // beforeEach(() => TestBed.configureTestingModule({
-  //   providers: [
-  //     urlValidator
-  //   ],
-  //   declarations:[],
-  //   imports:[],
-  //   schemas:[ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-  // }).compileComponents());
+  
 
-  // beforeEach(()=> {
+  it('return error if incorrect value', () => {
 
-  // })
+    expect(urlValidator(new FormControl('1')))
+    .toEqual(  {urlError: true} );
 
-  it('should be created', () => {
-    expect(urlValidator()).toBeTruthy();
+  });
+
+  
+
+  it('return null if correct value', () => {
+
+    expect(urlValidator(new FormControl('github.com/angular/angular')))
+    .toEqual( null );
+
   });
 
 });
