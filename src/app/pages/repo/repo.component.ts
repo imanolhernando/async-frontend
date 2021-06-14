@@ -26,7 +26,6 @@ export class RepoComponent implements OnInit {
           [
             urlValidator,
             Validators.required,
-            Validators.pattern('^(https:\/\/)?(http:\/\/)?(github.com\/)[a-z,-]+(\/)+[a-z,-]+')
           ])
     });
   }
