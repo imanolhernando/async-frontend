@@ -1,18 +1,32 @@
+import { State } from './../../store/index';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { getIssuesSelector } from '../../store/selectors/github.selector';
 import { MaterialModule } from './../../modules/material.module';
 import { IssueDataState } from './../../store/state/github.state';
 import { IssuesComponent } from './issues.component';
+import { select } from '@ngrx/store';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 /**
  * Test unitario para el componente IssuesComponent
  */
 
 describe('IssuesComponent', () => {
-  
-  let store: MockStore < IssueDataState[]> ;
-  const initialState  = {};
+  let mockgetIssuesSelector
+  let store: MockStore < State> ;
+
+  let initialState: State = {
+    issue : {
+      issueData : [],
+      error : null,
+      count: null 
+    },
+    router:null
+  }
   // declaracion del componente a testear
   let component: IssuesComponent;
 
@@ -26,14 +40,13 @@ describe('IssuesComponent', () => {
     TestBed.configureTestingModule({
       // en este objeto de configuracion se añaden los arrays (similar a los modules)
       imports:[
-        // si se importa algun servico sera necesario SIMULAR la llamada HTTP
-        // HttpClientTestingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
         RouterTestingModule,
-        MaterialModule, 
       ],
       providers:[
         //servicios necesarios
-        provideMockStore({ initialState }),
+        provideMockStore({initialState})
       ],
       declarations: [ IssuesComponent ],
       schemas: [
@@ -54,6 +67,17 @@ describe('IssuesComponent', () => {
     // instanciamos el componente
     component = fixture.componentInstance;
     store = TestBed.inject(MockStore)
+
+    mockgetIssuesSelector = store.overrideSelector(
+      getIssuesSelector, 
+       {
+        issueData : [],
+        error : null,
+        count: null 
+      }
+    );
+
+    store.refreshState();
     // se activara el NgOnInit
     fixture.detectChanges();
   });
@@ -61,16 +85,54 @@ describe('IssuesComponent', () => {
   /**
    * Test
    */
-  it('should create', () => {
-    let issueDataState: IssueDataState[] = [
-      {
-        issueData : [],
-        error : null,
-      count: null
-      }
-    ]
-    store.setState(issueDataState);
+  it('should create with data', () => {
+
     expect(component).toBeTruthy();
+
+    expect(component.resultsLength).not.toBeUndefined;
+    
+    mockgetIssuesSelector.setResult({
+      issueData : null,
+      error : null,
+      count: null 
+    })
+    store.refreshState();
+    fixture.detectChanges();
+    expect(component.resultsLength).toBeUndefined;
+
   });
+
+
+  
+  
+ 
+  it('clear()',() => {
+    const spyStore = spyOn(store, 'dispatch');
+    component.clear();
+    expect(spyStore).toHaveBeenCalled();
+  });
+
+  it('setPageSizeOptions()',() => {
+
+    component.setPageSizeOptions('2');
+    expect( component.pageSizeOptions).toEqual([2]);
+
+    component.setPageSizeOptions('');
+    expect( component.pageSizeOptions).toEqual(component.pageSizeOptions);
+
+  });
+
+  it('pageEventEmit()',() => {
+    const spyStore = spyOn(store, 'dispatch');
+    component.pageEventEmit({
+      pageIndex: 1,
+      previousPageIndex: 1,
+      pageSize: 1,
+      length: 1,
+    });
+    expect( component.pageEvent.length).toBe(1);
+    expect(spyStore).toHaveBeenCalled();
+  })
+
 
 });
