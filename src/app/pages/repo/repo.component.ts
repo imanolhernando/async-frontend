@@ -31,8 +31,8 @@ export class RepoComponent implements OnInit {
   }
 
   submit(url: string): void{
-    const str: string[] = url.replace(( 'https://github.com/' || 'http://github.com/' || 'github.com/'  ), '').split('/');
-    if (str.length  > 0 ) {
+    const str: string[] = url.split('/');
+    if (str.length  > 1 ) {
       this.router.navigate([`${str[str.length - 2] }/${str[str.length - 1 ]}`]);
     }
   }
