@@ -64,23 +64,21 @@ describe('RepoComponent', () => {
     url.setValue("test");
     errors = url.errors || {};
     expect(errors['required']).toBeFalsy();
-    expect(errors['pattern']).toBeTruthy();
 
     // Set url to something correct
     url.setValue("github.com/angular/angular");
     errors = url.errors || {};
     expect(errors['required']).toBeFalsy();
-    expect(errors['pattern']).toBeFalsy();
     });
  
-  it('submit() call navigate if str.length', () => {
+  it('submit() ', () => {
     const url = 'github.com/angular/angular'
     component.submit(url);
     expect(router.navigate).toHaveBeenCalled();
   }); 
 
-  xit('submit() 2', () => {
-    component.submit('http://github.com/f');
+  it('submit() 2', () => {
+    component.submit('test');
     expect(router.navigate).not.toHaveBeenCalled();
   }); 
 
