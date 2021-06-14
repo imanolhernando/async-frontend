@@ -1,7 +1,8 @@
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from 'src/app/modules/material.module';
 
@@ -10,6 +11,9 @@ import { RepoComponent } from './repo.component';
 describe('RepoComponent', () => {
   let component: RepoComponent;
   let fixture: ComponentFixture<RepoComponent>;
+  let router = {
+    navigate: jasmine.createSpy('navigate')
+  }
 
   beforeEach( () => {
      TestBed.configureTestingModule({
@@ -21,7 +25,14 @@ describe('RepoComponent', () => {
         ReactiveFormsModule,
         MaterialModule,
        ],
-      declarations: [ RepoComponent ]
+      declarations: [ RepoComponent ],
+      providers: [
+        { provide: Router, useValue: router }
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA,
+        NO_ERRORS_SCHEMA
+      ]
     })
     .compileComponents();
   });
@@ -43,7 +54,7 @@ describe('RepoComponent', () => {
   it('url field validity', () => {
     let errors = {};
     let url = component.form.controls['url'];
-    expect(url.valid).toBeFalsy();
+    expect(url.valid).toBeFalse();
 
     // url field is required
     errors = url.errors || {};
@@ -62,24 +73,23 @@ describe('RepoComponent', () => {
     expect(errors['pattern']).toBeFalsy();
     });
  
-  it('submit', () => {
-    component.submit('github.com/angular/angular');
+  it('submit() call navigate if str.length', () => {
+    const url = 'github.com/angular/angular'
+    component.submit(url);
+    expect(router.navigate).toHaveBeenCalled();
   }); 
 
-  it('submit2', () => {
-    component.submit('https://github.com/angular/angular');
-  });
+  xit('submit() 2', () => {
+    component.submit('http://github.com/f');
+    expect(router.navigate).not.toHaveBeenCalled();
+  }); 
 
   
-
-  it('submit3', () => {
-    component.submit('http://github.com/angular/angular');
-  });
-
-  it('submit3', () => {
-    component.submit('d');
-  });
-  
+  // it('submit4', () => {
+  //   const url = ''
+  //   component.submit(url);
+  //   expect(router.navigate).not.toHaveBeenCalled();
+  // });
 
 
 
