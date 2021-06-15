@@ -2,6 +2,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core';
 import { urlValidator } from '../../validators';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
+
+
 @Component({
   selector: 'app-repo',
   templateUrl: './repo.component.html',
@@ -13,9 +16,10 @@ export class RepoComponent implements OnInit {
   constructor(
     private  router: Router,
     public formBuilder: FormBuilder ) {
-      this.createForm();  }
+    }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
+    this.createForm();
   }
 
   createForm(): void {
@@ -26,16 +30,13 @@ export class RepoComponent implements OnInit {
           [
             urlValidator,
             Validators.required,
-            Validators.pattern('^(https:\/\/)?(http:\/\/)?(github.com\/)[a-z,-]+(\/)+[a-z,-]+')
           ])
     });
   }
 
   submit(url: string): void{
-    const str: string[] = url.replace(( 'https://github.com/' || 'http://github.com/' || 'github.com/'  ), '').split('/');
-    if (str.length  > 0 ) {
-      this.router.navigate([`${str[str.length - 2] }/${str[str.length - 1 ]}`]);
-    }
+    const str: string[] = url.split('/');
+    this.router.navigate([`${str[str.length - 2] }/${str[str.length - 1 ]}`]);
   }
 
 }

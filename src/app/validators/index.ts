@@ -1,4 +1,4 @@
-import {AbstractControl, ValidatorFn} from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 // export function urlValidator(): ValidatorFn {
 //     return (control: AbstractControl): { [key: string]: any } | null =>
@@ -9,14 +9,11 @@ import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 const REGEX = new RegExp( ('^(https:\/\/)?(http:\/\/)?(github.com\/)[a-z,-]+(\/)+[a-z,-]+'));
 
-export function urlValidator(): ValidatorFn {
-    return (control: AbstractControl) =>{
+export function urlValidator(control: AbstractControl): ValidationErrors | null {
         if(REGEX.test(control.value)) {
-            
             return null
         } else {
             return {urlError: true}
         }
-    }
     
 }
