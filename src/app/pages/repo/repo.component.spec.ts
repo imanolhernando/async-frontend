@@ -1,33 +1,30 @@
-import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from 'src/app/modules/material.module';
-
 import { RepoComponent } from './repo.component';
+
 
 describe('RepoComponent', () => {
   let component: RepoComponent;
   let fixture: ComponentFixture<RepoComponent>;
-  let router = {
+  let routerSpy = {
     navigate: jasmine.createSpy('navigate')
   }
 
   beforeEach( () => {
      TestBed.configureTestingModule({
        imports:[
-        RouterTestingModule,
         MaterialModule, 
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule,
        ],
       declarations: [ RepoComponent ],
       providers: [
-        { provide: Router, useValue: router }
+        { provide: Router, useValue: routerSpy },
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
@@ -71,23 +68,12 @@ describe('RepoComponent', () => {
     expect(errors['required']).toBeFalsy();
     });
  
-  it('submit() ', () => {
-    const url = 'github.com/angular/angular'
-    component.submit(url);
-    expect(router.navigate).toHaveBeenCalled();
-  }); 
+    it('submit() ', () => {
+      const url = 'github.com/angular/angular'
+      component.submit(url);
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['angular/angular']);
+    }); 
 
-  it('submit() 2', () => {
-    component.submit('test');
-    expect(router.navigate).not.toHaveBeenCalled();
-  }); 
-
-  
-  // it('submit4', () => {
-  //   const url = ''
-  //   component.submit(url);
-  //   expect(router.navigate).not.toHaveBeenCalled();
-  // });
 
 
 
