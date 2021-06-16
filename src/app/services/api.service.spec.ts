@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { ApiService } from './api.service';
+
 
 describe('ApiService', () => {
   let service: ApiService;

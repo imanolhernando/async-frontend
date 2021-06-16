@@ -6,7 +6,7 @@
             <input autofocus matInput formControlName="url" placeholder="github.com/angular/angular">
           </mat-form-field>          
           <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.required && form.controls['url'].touched" class="mat-error">Inserta una url de GitHub</small>
-          <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.urlError && form.controls['url'].touched" class="mat-error">Introduce un repositorio correcto.</small>
+          <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.urlError && form.controls['url'].touched && !form.controls['url'].errors.required" class="mat-error">Introduce un repositorio correcto.</small>
           <small *ngIf="form.controls['url'].errors && form.controls['url'].touched" class="mat-error">Ejemplo: github.com/angular/angular</small>
         </form>
     <button mat-raised-button color="primary" (click)="submit(form.value.url)"  [disabled]="form.invalid" >Ver Issues</button>
