@@ -1,13 +1,13 @@
-import { clearIssues, getIssues, getRepo } from './../../store/actions/github.actions';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IssueData } from '../../models/issue-data';
 import { getIssuesSelector } from '../../store/selectors/github.selector';
 import { IssueDataState } from '../../store/state/github.state';
-import { ActivatedRoute, Router } from '@angular/router';
+import { clearIssues, getIssues, getRepo } from './../../store/actions/github.actions';
 
 @Component({
   selector: 'app-issues',
@@ -41,7 +41,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.state$ = this.store.select(getIssuesSelector).subscribe(data => {
+    this.state$ = this.store.pipe(select(getIssuesSelector)).subscribe(data => {
       if (data.issueData){
         this.issuesList = new MatTableDataSource<IssueData>(data.issueData);
         this.error = data.error;
@@ -58,9 +58,15 @@ export class IssuesComponent implements OnInit, OnDestroy {
 
   pageEventEmit(event): void{
     this.pageEvent = event;
-    this.store.dispatch(getIssues(
-      {user: this.user, repo: this.repo, perPage:  this.pageEvent.pageSize, page:  this.pageEvent.pageIndex + 1}
-    ));
+    this.store.dispatch(
+      getIssues(
+        { user: this.user,
+          repo: this.repo,
+          perPage: this.pageEvent.pageSize,
+          page: this.pageEvent.pageIndex + 1 
+        }
+      )
+    );
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string): void {

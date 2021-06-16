@@ -1,8 +1,7 @@
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { urlValidator } from '../../validators';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { urlValidator } from '../../validators';
 
 
 @Component({
