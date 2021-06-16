@@ -3,10 +3,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { finalize, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ApiService } from '../services/api.service';
-
 import { LoadingInterceptor } from './loading.interceptor';
+
 
 describe('LoadingInterceptor', () => {
 

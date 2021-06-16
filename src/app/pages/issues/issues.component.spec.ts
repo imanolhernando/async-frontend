@@ -1,15 +1,12 @@
-import { State } from './../../store/index';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { getIssuesSelector } from '../../store/selectors/github.selector';
 import { MaterialModule } from './../../modules/material.module';
-import { IssueDataState } from './../../store/state/github.state';
+import { State } from './../../store/index';
 import { IssuesComponent } from './issues.component';
-import { select } from '@ngrx/store';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**
  * Test unitario para el componente IssuesComponent

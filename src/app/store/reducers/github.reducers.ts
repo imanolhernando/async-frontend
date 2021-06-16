@@ -1,7 +1,7 @@
-import { IssueData } from './../../models/issue-data';
 import { Action, createReducer, on } from '@ngrx/store';
-import * as GitHubActions from './../actions/github.actions';
 import { initializeState, IssueDataState } from '../state/github.state';
+import { IssueData } from './../../models/issue-data';
+import * as GitHubActions from './../actions/github.actions';
 
 const GitHubreducer = createReducer(
   initializeState,
