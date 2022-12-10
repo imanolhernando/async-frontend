@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'repo',
-    loadChildren: () => import('./pages/repo/repo.module').then( m => m.RepoModule)
+    loadChildren: () => import('./ui/pages/repo/repo.module').then( m => m.RepoModule)
   },
   {
     path: ':user/:repo',
-    loadChildren: () => import('./pages/issues/issues.module').then( m => m.IssuesModule)
+    loadChildren: () => import('./ui/pages/issues/issues.module').then( m => m.IssuesModule)
   },
 ];
 
