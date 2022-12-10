@@ -55,8 +55,8 @@ export interface IssueData {
   assignees: string[];
   milestone?: string;
   comments: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   closed_at?: string;
   author_association: string;
   active_lock_reason?: string;

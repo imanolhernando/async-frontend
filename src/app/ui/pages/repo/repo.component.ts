@@ -3,7 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators,AbstractControl
+  Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { urlValidator } from '@utils/validators';
