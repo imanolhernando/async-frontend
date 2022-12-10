@@ -10,7 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { IssuesEffects } from './store/effects/github.effects';
 import { reducers, metaReducers } from './store';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -24,14 +23,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxSpinnerModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([IssuesEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, }),
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, }),
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true, } ],
   bootstrap: [AppComponent],

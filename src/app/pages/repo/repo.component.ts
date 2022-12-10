@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { urlValidator } from '../../validators';
 
@@ -11,10 +11,10 @@ import { urlValidator } from '../../validators';
 })
 export class RepoComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   constructor(
     private  router: Router,
-    public formBuilder: FormBuilder ) {
+    public formBuilder: UntypedFormBuilder ) {
     }
 
   ngOnInit(): void {
@@ -22,9 +22,9 @@ export class RepoComponent implements OnInit {
   }
 
   createForm(): void {
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       url:
-        new FormControl(
+        new UntypedFormControl(
           '',
           [
             urlValidator,
