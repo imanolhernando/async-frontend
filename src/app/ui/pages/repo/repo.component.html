@@ -1,13 +1,13 @@
 <main>
     <h1>Introduce un repositorio de GitHub</h1> 
-        <form [formGroup]="form" >
+        <form [formGroup]="form" (submit)="submit(form.value.url)">
           <mat-form-field>
             <mat-label>Repositorio</mat-label>
             <input autofocus matInput formControlName="url" placeholder="github.com/angular/angular">
           </mat-form-field>          
-          <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.required && form.controls['url'].touched" class="mat-error">Inserta una url de GitHub</small>
-          <small *ngIf="form.controls['url'].errors && form.controls['url'].errors.urlError && form.controls['url'].touched && !form.controls['url'].errors.required" class="mat-error">Introduce un repositorio correcto.</small>
-          <small *ngIf="form.controls['url'].errors && form.controls['url'].touched" class="mat-error">Ejemplo: https://github.com/mozilla/pdf.js</small>
+          <small *ngIf="fUrl.errors && fUrl.errors.required && fUrl.touched" class="mat-error">Inserta una url de GitHub</small>
+          <small *ngIf="fUrl.errors && fUrl.errors.urlError && fUrl.touched && !fUrl.errors.required" class="mat-error">Introduce un repositorio correcto.</small>
+          <small *ngIf="fUrl.errors && fUrl.touched" class="mat-error">Ejemplo: https://github.com/mozilla/pdf.js</small>
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" >Ver Issues</button>
         </form>
-    <button mat-raised-button color="primary" (click)="submit(form.value.url)"  [disabled]="form.invalid" >Ver Issues</button>
 </main>
