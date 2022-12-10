@@ -2,7 +2,21 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@ui/*": [
+        "./app/ui/*"
+      ],
+      "@core/*": [
+        "./app/core/*"
+      ],
+      "@utils/*": [
+        "./app/utils/*"
+      ],
+      "@environments/*": [
+        "./environments/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -10,11 +24,17 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false,
+    "removeComments": true
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
